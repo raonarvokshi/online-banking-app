@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load socialaccount %}
 
 {% block custom-css %}
     <style>
@@ -13,6 +14,38 @@
         .img-container {
             margin-top: 80px;
         }
+
+        .google-login-button {
+            background-color: #4285F4; /* Ngjyra e bluzës së Google */
+            color: white; /* Ngjyra e tekstit */
+            padding: 10px 20px; /* Hapësira brenda butonit */
+            border-radius: 5px; /* Forma e afërt e butonit */
+            text-decoration: none; /* Hiq nënvizimin nga lidhjet */
+            display: inline-block; /* Vendos butonin në të njëjtin rresht me tekstin */
+        }
+
+        .or-text {
+            margin-left: 200px;
+            margin-top: 0;
+        }
+
+        .google-icon {
+            background: linear-gradient(45deg, #4285F4, #DB4437, #F4B400, #0F9D58); /* Gradients e ngjyrave */
+            -webkit-background-clip: text; /* Apliko gradientin në tekst */
+            -webkit-text-fill-color: transparent; /* Ngjyra transparente për tekst */
+        }
+
+        .google-logo {
+            width: 30px;
+            position: relative;
+            right: 5px;
+        }
+
+        .google-text {
+            position: relative;
+            right: 5px;
+        }
+
     </style>
 {% endblock custom-css %}
 
@@ -42,10 +75,45 @@
             <label for="password" class="form-label">Password</label>
             <input type="password" class="form-control" id="password" name="password" required>
         </div>
-        <button type="submit" class="btn btn-outline-primary">LOG IN</button>
+        <button type="submit" class="btn btn-outline-primary btn-lg">LOG IN</button>
         <p class="mt-3">Don't have an account?
             <a href="{% url 'register' %}" class="register-link text-primary text-decoration-none fw-bolder">Register</a>
         </p>
+
+        <hr>
+
+        <!-- <div class="text-center">
+            <button class="btn btn-primary text-light rounded-pill mt-2">
+                <img src="{% static 'img/google-logo.png' %}" alt="" class="img-fluid bg-light rounded-pill google-logo">
+                <a class="text-light text-decoration-none google-text" 
+                href="https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?client_id=98289202800-e255eureau39649gli8rrhdbpljl84gg.apps.googleusercontent.com&redirect_uri=http%3A%2F%2F127.0.0.1%3A8000%2Faccounts%2Fgoogle%2Flogin%2Fcallback%2F&scope=profile&response_type=code&state=ayYHRbLhDwOFwUy7&service=lso&o2v=2&theme=glif&flowName=GeneralOAuthFlow">
+                    Sign in with Google
+                </a>
+            </button>
+        </div> -->
+
+        <div class="text-center">
+            <button class="btn btn-primary text-light rounded-pill mt-2 btn-sm">
+                <img src="{% static 'img/google-logo.png' %}" alt="" class="img-fluid bg-light rounded-pill google-logo">
+                <a class="text-light text-decoration-none google-text fw-bolder" 
+                href="{% provider_login_url 'google' %}">
+                    Sign in with Google
+                </a>
+            </button>
+        </div>
+
+        <!-- <div class="text-center">
+            <button class="btn btn-primary text-light rounded-pill mt-2 btn-sm">
+                <img src="{% static 'img/google-logo.png' %}" alt="" class="img-fluid bg-light rounded-pill google-logo">
+                <a class="text-light text-decoration-none google-text" 
+                href="https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?client_id=98289202800-e255eureau39649gli8rrhdbpljl84gg.apps.googleusercontent.com&redirect_uri=http%3A%2F%2F127.0.0.1%3A8000%2Faccounts%2Fgoogle%2Flogin%2Fcallback%2F&scope=profile&response_type=code&state=OrVuz8VmsujsolHN&service=lso&o2v=2&theme=glif&flowName=GeneralOAuthFlow">
+                    Sign in with Google
+                </a>
+            </button>
+        </div> -->
+
+        <!-- <button><a href="{% provider_login_url 'google' %}" class="google-login-button" target="_blank">Google Login</a></button> -->
+
         <div id="validation-error" class="text-danger"></div>
         </form>
     </div>
